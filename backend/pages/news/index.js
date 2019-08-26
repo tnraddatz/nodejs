@@ -1,10 +1,9 @@
 //Setup
 var express = require('express');
-var constants = require('../../variables/constants')
 var clean_url = require('./clean_url').clean_url
 const urlMetadata = require('url-metadata')
 
-var router = express.Router();
+var router = express.Router()
 
 //Routes
 router.get('/', (req, res) => {
@@ -12,13 +11,13 @@ router.get('/', (req, res) => {
 })
 
 router.post('/new_article', (req,res) => {
-    //send url to post_article.js and recieve json back
     var url = clean_url(req.body.url)
+
     urlMetadata(url).then(
-        function (metadata) { // success handler
+        function (metadata) {    // success handler
             res.send(metadata)
         },
-        function (error) { // failure handler
+        function (error) {      // failure handler
             console.error(error)
             res.status(404).send({error : "Cannot Find URL"})
         }
@@ -26,6 +25,7 @@ router.post('/new_article', (req,res) => {
 })
 
 //End Routes 
+
 
 //Export router
 module.exports = router

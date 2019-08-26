@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
         id : cars.length + 1, 
         info : {
             name : req.body.info.name, 
-            rating : req.body.info.mpg
+            mpg : req.body.info.mpg
         }
     };
 
