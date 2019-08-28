@@ -4,23 +4,30 @@ var router = express.Router()
 
 //Fake DB
 const cars = [
-    { id : 1, info : { name: "Porsche", mpg: "20"}}, 
-    { id : 2, info : { name: "Mercedes", mpg: "26"}}, 
-    { id : 3, info : { name: "BMW", mpg: "22"}}
+    { brand: "porsche", mpg: "20"}, 
+    { brand: "Mercedes", mpg: "26"}, 
+    { brand: "BMW", mpg: "22"}
 ];
 
 //Routes
 router.get('/', (req, res) => {
-    res.send(cars);
-});
+    var result = Object.values(req.query)
+    var return_res = cars
+
+    if (result.length > 0 ){
+        for (var e in cars) {
+            if (cars[e].brand === result[0]){
+                return_res = { mpg: cars[e].mpg }
+            }
+        }
+    }
+    res.send(return_res)
+})
 
 router.post('/', (req, res) => {
     var car = {
-        id : cars.length + 1, 
-        info : {
-            name : req.body.info.name, 
-            mpg : req.body.info.mpg
-        }
+        name : req.body.info.name, 
+        mpg : req.body.info.mpg
     };
 
     cars.push(car);
