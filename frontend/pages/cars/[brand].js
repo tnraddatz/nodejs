@@ -10,16 +10,15 @@ const Cars = props => (
 
 Cars.getInitialProps = async ({query}) => {
     var brand = query.brand
-    console.log(brand)
     var st = 'http://127.0.0.1:8000/cars?brand=' + brand
-    console.log(st)
+
     const res = await fetch(st);
     const data = await res.json();
-    console.log(data)
+
     return {
         mpg: data.mpg, 
         brand: brand
     }
 }
   
-  export default Cars
+export default Cars
