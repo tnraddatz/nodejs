@@ -3,6 +3,9 @@ const express = require('express')
 const app = express()
 var cors = require('cors');
 
+//Configs
+app.use(cors());
+
 //Routes 
 var movies = require('./pages/movies')
 var cars = require('./pages/cars')
@@ -17,10 +20,6 @@ app.use('/movies', movies)
 app.use('/cars', cars)
 app.use('/news', news)
 
-
-
-//Configs
-app.use(cors());
 /*var allowedOrigins =  ['http://localhost:3000',
                         'http://yourapp.com'];
 
